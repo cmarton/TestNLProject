@@ -1,0 +1,31 @@
+<http-page executeResourcesDynamically="false" name="page"
+    playRequestsSequentially="false"
+    recordedArtifactZipFileName="team/vus/@browser@user_@create_report/%resources%/recorded-artifacts/8fcd7e34-0724-4bff-a4d0-1a6cedc1b8c0.zip"
+    slaProfileEnabled="false" thinkTime="0"
+    thinkTimeMode="MODE_SIMPLE_THINK_TIME" thinkTimeRangeEnd=""
+    thinkTimeRangeStart="" uid="8fcd7e34-0724-4bff-a4d0-1a6cedc1b8c0">
+    <embedded-action>8ad364df-e8b0-4854-9b4c-6631689add19</embedded-action>
+</http-page>
+<http-action actionType="1" confFormExtractorParameters=""
+    extractorInjectPathPolicy="2" extractorPath="/"
+    extractorPathPolicy="1" extractorServerUid="sampledemo.neotys.com"
+    followRedirects="false" generatedByClient="false"
+    linkExtractorSeveralMatchOccurrence="1"
+    linkExtractorSeveralMatchPolicy="1" linkExtractorType="1"
+    method="POST" name="http_request_" path="/MYTEST" postType="1"
+    recordedArtifactZipFileName="team/vus/@browser@user_@create_report/%resources%/recorded-artifacts/8fcd7e34-0724-4bff-a4d0-1a6cedc1b8c0.zip"
+    serverUid="sampledemo.neotys.com" slaProfileEnabled="false"
+    uid="8ad364df-e8b0-4854-9b4c-6631689add19" useKeepAlive="false">
+    <responsePageFileDescription>recorded-responses/res_8ad364df-e8b0-4854-9b4c-6631689add19</responsePageFileDescription>
+    <assertions>
+        <assertion-content name="assertion_1" notType="false" pattern="my TEXT"/>
+        <assertion-response containsType="true" matchType="false"
+            name="assertion_2" notType="true">
+            <testString>&lt;a href="/page.jsp\?kind=1&amp;param1=(.*?)&amp;param2=value2"&gt;</testString>
+        </assertion-response>
+    </assertions>
+    <header name="Content-Type" value="application/x-www-form-urlencoded"/>
+    <responseHeaders/>
+    <extractor-html-infos extractorRegExp="false" htmlType="0"/>
+    <record-html-infos extractorRegExp="false" htmlType="0"/>
+</http-action>

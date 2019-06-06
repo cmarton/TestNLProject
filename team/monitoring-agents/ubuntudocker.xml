@@ -1,0 +1,25 @@
+<me-host loadWeight="1" sapSupport="false" standalone="true"
+    supportWANEmulation="false" uid="ubuntudocker" version="6.10.0;build=20190410-5">
+    <!--****** LG NETWORK INTERFACES ******-->
+    <lg-networkiface description="lo" enabled="false" isLoopBack="true" name="lo">
+        <!--****** LG ADDRESSES ******-->
+        <lg-address enabled="false" hostname="localhost">
+            <ip value="127.0.0.1"/>
+        </lg-address>
+        <lg-address enabled="false" hostname="0:0:0:0:0:0:0:1%lo">
+            <ip value="0:0:0:0:0:0:0:1%lo"/>
+        </lg-address>
+        <!--****** END LG ADDRESSES ******-->
+    </lg-networkiface>
+    <lg-networkiface description="ens32" enabled="false"
+        isLoopBack="false" name="ens32">
+        <!--****** LG ADDRESSES ******-->
+        <lg-address enabled="false" hostname="10.0.4.127">
+            <ip value="10.0.4.127"/>
+        </lg-address>
+        <lg-address enabled="false" hostname="fe80:0:0:0:250:56ff:fe9a:334e%ens32">
+            <ip value="fe80:0:0:0:250:56ff:fe9a:334e%ens32"/>
+        </lg-address>
+        <!--****** END LG ADDRESSES ******-->
+    </lg-networkiface>
+</me-host>

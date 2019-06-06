@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions 
+	xmlns:tns="urn:neoload:test:testBean" 
+	targetNamespace="urn:neoload:test:testBean" 
+	xmlns:apachesoap="http://xml.apache.org/xml-soap" 
+	xmlns:impl="urn:neoload:test:testBean" 
+	xmlns:intf="urn:neoload:test:testBean" 
+	xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding//" 
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+
+	<wsdl:types>
+		<xsd:schema targetNamespace="urn:neoload:test:testBean" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">
+		<xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+		   
+		   <xsd:simpleType name="mimeEnum">
+		        <xsd:restriction base="xsd:string">
+		         <xsd:enumeration value="jpeg"/>
+		         <xsd:enumeration value="png"/>
+		         <xsd:enumeration value="gif"/>
+		        </xsd:restriction>
+		       </xsd:simpleType>
+		       
+		   <xsd:simpleType name="limitedString">
+			  <xsd:restriction base="xsd:string">
+			    <xsd:minLength value="5"/>
+    			<xsd:maxLength value="8"/>
+			  </xsd:restriction>
+			</xsd:simpleType>
+		       
+		   <xsd:complexType name="Photo">
+		    <xsd:simpleContent>
+		     <xsd:extension base="xsd:int">
+		      <xsd:attribute name="pictype" type="tns:mimeEnum">
+		      </xsd:attribute>
+		     </xsd:extension>
+		    </xsd:simpleContent>
+		   </xsd:complexType>
+		   
+		   
+		   <xsd:simpleType name="genderType">
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="male"/>
+                    <xsd:enumeration value="female"/>
+                </xsd:restriction>
+			</xsd:simpleType>
+			            
+		   <xsd:complexType name="Person">
+			    <xsd:sequence>
+			        <xsd:element name="name" type="xsd:string"/>
+			        <xsd:element name="gender" type="tns:genderType"/>
+			        
+			    </xsd:sequence>
+			</xsd:complexType>
+		  
+  
+		<xsd:complexType name="SeqMinMax"> 
+	
+		    <xsd:sequence> 
+		        <xsd:element name="itema" type="xsd:string" minOccurs="2" maxOccurs="unbounded" nillable="false"/>
+		        <xsd:element name="itemb" type="tns:limitedString" minOccurs="3" maxOccurs="unbounded" nillable="false"/> 
+		    </xsd:sequence>
+		    <xsd:attribute name="mimeAttr" type="tns:mimeEnum"/>  	
+		</xsd:complexType> 
+		
+		 <xsd:complexType name="MyChoice">
+               <xsd:choice>
+                   <xsd:element name="PO" minOccurs="1" maxOccurs="1" type="xsd:int"/>
+                   <xsd:element name="Invoice" minOccurs="0" maxOccurs="unbounded" type="xsd:string"/>
+               </xsd:choice>
+        </xsd:complexType>
+        
+		</xsd:schema>
+	</wsdl:types>
+
+   <wsdl:message name="getMessageRequest">
+		<wsdl:part name="MyChoice" type="tns:MyChoice"/>
+		<wsdl:part name="photo" type="tns:Photo"/>
+		<wsdl:part name="person" type="tns:Person"/>
+   </wsdl:message>
+
+   <wsdl:message name="setMessageResponse">
+   
+   		<wsdl:part name="status" type="xsd:string"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getMessageResponse">
+
+      <wsdl:part name="status" type="xsd:string"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="setMessageRequest">
+
+      <wsdl:part name="message" type="xsd:string"/>
+      <wsdl:part name="uint" type="xsd:unsignedInt"/>
+      <wsdl:part name="anArray" type="tns:SeqMinMax"/>
+
+   </wsdl:message>
+
+   <wsdl:portType name="TestBeanPort1">
+
+      <wsdl:operation name="setMessage" parameterOrder="message anArray uint">
+
+         <wsdl:input message="impl:setMessageRequest" name="setMessageRequest"/>
+
+         <wsdl:output message="impl:setMessageResponse" name="setMessageResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getMessage">
+
+         <wsdl:input message="impl:getMessageRequest" name="getMessageRequest"/>
+
+         <wsdl:output message="impl:getMessageResponse" name="getMessageResponse"/>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+   
+   <wsdl:binding name="TestBeanSoapBinding" type="impl:TestBeanPort1">
+
+      <wsdlsoap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="setMessage">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="setMessageRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="url:TestBean" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="setMessageResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="url:TestBean" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getMessage">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getMessageRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="url:TestBean" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getMessageResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="url:TestBean" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+   
+   
+   <wsdl:service name="testBeanService">
+
+      <wsdl:port binding="impl:TestBeanSoapBinding" name="testBean">
+
+         <wsdlsoap:address location="http://jack:9090/SOAPTest/services/testBean"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+   
+
+</wsdl:definitions>
